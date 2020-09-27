@@ -1,4 +1,4 @@
-﻿import tkinter as tk
+import tkinter as tk
 from tkinter import ttk
 
 from compound import *
@@ -40,7 +40,7 @@ class App(tk.Frame):
         self.style.configure("TLabel", font=self.text)
         self.style.configure("Form.TLabel", font=self.form)
 
-        self.l_comps = ttk.Label(self, text="Вещества", style="TLabel")
+        self.l_comps = ttk.Label(self, text="Compounds", style="TLabel")
         self.l_comps.grid(row=0, column=0, columnspan=3, pady=10, sticky="s")
 
         self.t_comps = tk.Text(self, wrap="none", height=10, padx=5, pady=5,
@@ -57,14 +57,14 @@ class App(tk.Frame):
         self.t_comps["xscrollcommand"] = self.sx_comps.set
         self.sx_comps.grid(row=2, column=0, columnspan=3, sticky="nwe")
 
-        self.b_submit = ttk.Button(self, text="Прогнозировать", style="TButton")
+        self.b_submit = ttk.Button(self, text="Compute", style="TButton")
         self.b_submit.bind("<Button-1>", self.action)
         self.b_submit.grid(row=3, column=0, columnspan=3, pady=5, sticky="n")
 
-        self.l_in = ttk.Label(self, text="Как исходное вещество", style="TLabel")
+        self.l_in = ttk.Label(self, text="As an input", style="TLabel")
         self.l_in.grid(row=4, column=0, pady=10, sticky="s")
 
-        self.l_out = ttk.Label(self, text="Как продукт реакции", style="TLabel")
+        self.l_out = ttk.Label(self, text="As an output", style="TLabel")
         self.l_out.grid(row=4, column=2, pady=10, sticky="s")
 
         self.lb_in = tk.Listbox(self, font=self.form)
@@ -128,7 +128,7 @@ class App(tk.Frame):
 
         self.top.append(tk.Toplevel(self))
         tn = len(self.top) - 1
-        self.top[tn].wm_title("Расчёт масс веществ")
+        self.top[tn].wm_title("Mass Calculating")
 
         self.top[tn].react = Reaction(lb.reacts[sel])
         comps = (self.top[tn].react.inp + self.top[tn].react.outp)
@@ -143,7 +143,7 @@ class App(tk.Frame):
               sticky="w")
 
             text = tk.StringVar()
-            text.set("1 г")
+            text.set("1 g")
             self.top[tn].v_mass.append(text)
 
             self.top[tn].e_mass.append(ttk.Entry(self.top[tn], font=self.entry,
@@ -161,10 +161,10 @@ class App(tk.Frame):
         comp = comp.replace("–", "-").replace("≡", "#")
         val = self.top[tn].v_mass[cn].get()
         react = self.top[tn].react
-        _val = lambda val=val: val[0: -1] if val[-1] == 'г' else val
+        _val = lambda val=val: val[0: -1] if val[-1] == 'g' else val
         mass = react.count_mass(comp, float(_val()))
         for i in range(len(mass)):
-            self.top[tn].v_mass[i].set(repr(mass[i]) + " г")
+            self.top[tn].v_mass[i].set(repr(mass[i]) + " g")
 
 if __name__ == "__main__":
     preload()
@@ -172,7 +172,7 @@ if __name__ == "__main__":
     root = tk.Tk()
 
     root.wm_state("zoomed")
-    root.wm_title("Расчёт химических реакций неорганических веществ")
+    root.wm_title("Predicting the chemical properties of inorganic compounds")
     root.columnconfigure(0, weight=1)
     root.rowconfigure(0, weight=1)
 
