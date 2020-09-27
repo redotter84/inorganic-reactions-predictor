@@ -173,10 +173,10 @@ class Reaction:
         return ms
 
     def load_cond(self, cond):
-        cond = cond.replace("t ", "; нагревание").replace("p ", "; давление").\
-             replace("te- ", "; расплав, эл. ток").replace("e- ", "; эл. ток").\
-             replace("hv ", "; свет").replace("c: ", "; катализатор: ").\
-             replace("c ", "; катализатор ")
+        cond = cond.replace("t ", "; heat").replace("p ", "; pressure").\
+             replace("te- ", "; electrolysis, molten").replace("e- ", "; electrolysis").\
+             replace("hv ", "; light").replace("c: ", "; catalyst: ").\
+             replace("c ", "; catalyst")
         return cond
 
     def __str__(self):
